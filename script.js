@@ -6,6 +6,7 @@
   const heartLayer = document.getElementById("heart-layer");
 
   let heartTimer = null;
+  let heartStopTimer = null;
 
   function createHeart() {
     if (!heartLayer) return;
@@ -14,7 +15,6 @@
 
     heart.className = "heart";
     heart.textContent = Math.random() > 0.3 ? "♥" : "♡";
-
     heart.style.left = `${Math.random() * 100}%`;
     heart.style.fontSize = `${12 + Math.random() * 18}px`;
     heart.style.setProperty(
@@ -24,9 +24,7 @@
 
     heartLayer.appendChild(heart);
 
-    window.setTimeout(() => {
-      heart.remove();
-    }, 6500);
+    window.setTimeout(() => heart.remove(), 6500);
   }
 
   function startHearts() {
@@ -34,28 +32,30 @@
       window.setTimeout(createHeart, i * 120);
     }
 
-    if (heartTimer) {
-      window.clearInterval(heartTimer);
-    }
+    if (heartTimer) window.clearInterval(heartTimer);
+    if (heartStopTimer) window.clearTimeout(heartStopTimer);
 
     heartTimer = window.setInterval(createHeart, 450);
 
-    window.setTimeout(() => {
+    heartStopTimer = window.setTimeout(() => {
       if (heartTimer) {
         window.clearInterval(heartTimer);
         heartTimer = null;
       }
+      heartStopTimer = null;
     }, 8500);
   }
 
   function openLetter() {
     document.body.classList.add("open");
 
-    envelopeButton.setAttribute("aria-expanded", "true");
-    envelopeButton.setAttribute(
-      "aria-label",
-      "Your anniversary letter is open"
-    );
+    if (envelopeButton) {
+      envelopeButton.setAttribute("aria-expanded", "true");
+      envelopeButton.setAttribute(
+        "aria-label",
+        "Close your anniversary letter"
+      );
+    }
 
     if (tapHint) {
       tapHint.textContent = "A little love, just for you ♥";
@@ -67,11 +67,13 @@
   function closeLetter() {
     document.body.classList.remove("open");
 
-    envelopeButton.setAttribute("aria-expanded", "false");
-    envelopeButton.setAttribute(
-      "aria-label",
-      "Open your anniversary letter"
-    );
+    if (envelopeButton) {
+      envelopeButton.setAttribute("aria-expanded", "false");
+      envelopeButton.setAttribute(
+        "aria-label",
+        "Open your anniversary letter"
+      );
+    }
 
     if (tapHint) {
       tapHint.textContent = "↗ Tap the envelope to open your letter";
@@ -80,6 +82,11 @@
     if (heartTimer) {
       window.clearInterval(heartTimer);
       heartTimer = null;
+    }
+
+    if (heartStopTimer) {
+      window.clearTimeout(heartStopTimer);
+      heartStopTimer = null;
     }
   }
 
@@ -106,4 +113,3 @@
     });
   }
 })();
-
