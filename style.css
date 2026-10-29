@@ -1,7 +1,7 @@
 
 /* =========================================
    FOR ASMITA, WITH LOVE
-   Envelope opens; complete letter slides out.
+   Complete envelope and letter animation
    ========================================= */
 
 :root {
@@ -160,7 +160,7 @@ h1 em {
   outline-offset: 5px;
 }
 
-/* Purple envelope body */
+/* The envelope body */
 
 .envelope {
   position: absolute;
@@ -174,7 +174,7 @@ h1 em {
   overflow: visible;
 }
 
-/* Paper starts INSIDE the closed envelope. */
+/* Paper is inside the envelope when closed */
 
 .envelope .letter {
   position: absolute;
@@ -198,6 +198,7 @@ h1 em {
 }
 
 .paper {
+  position: relative;
   width: 100%;
   padding: 18px 23px 16px;
   border-radius: 9px;
@@ -270,7 +271,7 @@ h1 em {
   text-align: center;
 }
 
-/* Back of the envelope */
+/* Back panel */
 
 .envelope-back {
   position: absolute;
@@ -281,7 +282,7 @@ h1 em {
   pointer-events: none;
 }
 
-/* Front pocket hides the paper while the envelope is closed. */
+/* Front pocket covers the paper while closed */
 
 .envelope-pocket {
   position: absolute;
@@ -290,10 +291,15 @@ h1 em {
   border-radius: 0 0 11px 11px;
   background: #a274bd;
   clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 250ms ease,
+    visibility 0s;
   pointer-events: none;
 }
 
-/* Envelope flap */
+/* Top triangular flap */
 
 .envelope-flap {
   position: absolute;
@@ -308,7 +314,8 @@ h1 em {
   transform-origin: top center;
   transition:
     transform 650ms ease,
-    opacity 400ms ease;
+    opacity 250ms ease,
+    visibility 0s;
   pointer-events: none;
 }
 
@@ -325,28 +332,35 @@ h1 em {
 }
 
 /* =========================================
-   OPEN ANIMATION
-   JavaScript adds body.open.
-   Raise the entire card above the envelope.
+   OPEN STATE
+   The paper rises above the whole envelope.
    ========================================= */
 
 body.open .envelope .letter {
   z-index: 10;
-  transform: translateY(-340px);
+  transform: translateY(-390px);
   box-shadow: 0 18px 38px #8f52752b;
 }
 
-/* Open the flap and move the front pocket out
-   of the way so no part of the paper is covered. */
+/* The front pocket fades away so it cannot
+   cover any part of the raised letter. */
+
+body.open .envelope-pocket {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 250ms ease,
+    visibility 0s 250ms;
+}
 
 body.open .envelope-flap {
   transform: rotateX(180deg);
   opacity: 0;
-}
-
-body.open .envelope-pocket {
-  opacity: 0;
-  transition: opacity 250ms ease;
+  visibility: hidden;
+  transition:
+    transform 650ms ease,
+    opacity 250ms ease,
+    visibility 0s 250ms;
 }
 
 body.open .wax-seal {
@@ -489,7 +503,7 @@ footer small {
 }
 
 /* =========================================
-   MOBILE
+   RESPONSIVE
    ========================================= */
 
 @media (max-width: 600px) {
@@ -546,7 +560,7 @@ footer small {
   }
 
   body.open .envelope .letter {
-    transform: translateY(-325px);
+    transform: translateY(-390px);
   }
 
   .sparkle-one {
