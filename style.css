@@ -1,14 +1,13 @@
 
-/* ==========================================
+/* =========================================
    FOR ASMITA, WITH LOVE
-   Complete stylesheet
-   ========================================== */
+   Envelope opens; complete letter slides out.
+   ========================================= */
 
 :root {
-  --pink-bg: #fff0f6;
   --pink: #df6c9c;
   --purple: #a36cba;
-  --purple-dark: #8754a7;
+  --purple-dark: #8956aa;
   --ink: #492d49;
   --muted: #a17699;
   --paper: #fffdf8;
@@ -65,7 +64,7 @@ button {
 #heart-layer {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 100;
   overflow: hidden;
   pointer-events: none;
 }
@@ -128,9 +127,9 @@ h1 em {
   line-height: 1.7;
 }
 
-/* ==========================================
-   LETTER AND ENVELOPE
-   ========================================== */
+/* =========================================
+   ENVELOPE SCENE
+   ========================================= */
 
 .letter-scene {
   position: relative;
@@ -141,20 +140,14 @@ h1 em {
   overflow: visible;
 }
 
-/*
-  Reserve enough space for the paper to rise.
-  The envelope stays near the bottom of this area.
-*/
-
 .envelope-button {
   position: relative;
   display: block;
   width: 100%;
-  height: 490px;
+  height: 440px;
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 0;
   background: transparent;
   text-align: left;
   cursor: pointer;
@@ -167,25 +160,27 @@ h1 em {
   outline-offset: 5px;
 }
 
+/* Purple envelope body */
+
 .envelope {
   position: absolute;
-  top: 225px;
+  top: 170px;
   left: 0;
   width: 100%;
   height: 255px;
   border-radius: 11px;
-  overflow: visible;
   background: linear-gradient(145deg, #ad80c5, #8956aa);
   box-shadow: 0 18px 42px #85519b2b;
+  overflow: visible;
 }
 
-/* The entire letter is one paper card. */
+/* Paper starts INSIDE the closed envelope. */
 
 .envelope .letter {
   position: absolute;
-  top: -218px;
+  top: 8px;
   left: 5%;
-  z-index: 10;
+  z-index: 2;
   width: 90%;
   height: auto;
   max-height: none;
@@ -194,17 +189,15 @@ h1 em {
   border-radius: 9px;
   overflow: visible;
   background: var(--paper);
-  box-shadow: 0 8px 30px #8f527522;
+  box-shadow: 0 5px 20px #75468f18;
   transform: translateY(0);
-  transform-origin: center bottom;
   transition:
-    transform 850ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    transform 950ms cubic-bezier(0.2, 0.75, 0.25, 1),
     box-shadow 700ms ease;
   will-change: transform;
 }
 
 .paper {
-  position: relative;
   width: 100%;
   padding: 18px 23px 16px;
   border-radius: 9px;
@@ -216,7 +209,7 @@ h1 em {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
   color: #b47b9e;
   font-size: 9px;
   font-weight: 700;
@@ -232,16 +225,16 @@ h1 em {
   color: #65465f;
   font-family: "Playfair Display", Georgia, serif;
   font-size: 12px;
-  line-height: 1.75;
+  line-height: 1.7;
   overflow-wrap: anywhere;
 }
 
 .letter-content p {
-  margin: 0 0 12px;
+  margin: 0 0 11px;
 }
 
 .letter-content .greeting {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--purple);
   font-size: 17px;
   font-style: italic;
@@ -249,14 +242,14 @@ h1 em {
 }
 
 .letter-content .signoff {
-  margin-top: 17px;
+  margin-top: 15px;
   margin-bottom: 4px;
 }
 
 .letter-content .signature {
   margin-bottom: 5px;
   color: var(--purple);
-  font-size: 20px;
+  font-size: 19px;
   font-style: italic;
   font-weight: 600;
 }
@@ -277,36 +270,36 @@ h1 em {
   text-align: center;
 }
 
-/* Envelope base */
+/* Back of the envelope */
 
 .envelope-back {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   border-radius: 11px;
   background: linear-gradient(145deg, #b58acb, #9561b1);
   pointer-events: none;
 }
 
-/* Front pocket covers the lower paper when closed. */
+/* Front pocket hides the paper while the envelope is closed. */
 
 .envelope-pocket {
   position: absolute;
   inset: 0;
-  z-index: 12;
+  z-index: 4;
   border-radius: 0 0 11px 11px;
   background: #a274bd;
   clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
   pointer-events: none;
 }
 
-/* Top flap */
+/* Envelope flap */
 
 .envelope-flap {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 14;
+  z-index: 5;
   width: 100%;
   height: 155px;
   border-radius: 10px 10px 0 0;
@@ -323,58 +316,42 @@ h1 em {
   position: absolute;
   top: 58%;
   left: 50%;
-  z-index: 15;
+  z-index: 6;
   color: var(--pink);
   font-size: 24px;
   transform: translate(-50%, -50%);
-  transition: opacity 300ms ease;
+  transition: opacity 250ms ease;
   pointer-events: none;
 }
 
-/* ==========================================
-   OPEN LETTER
-   The paper rises above the complete envelope.
-   ========================================== */
+/* =========================================
+   OPEN ANIMATION
+   JavaScript adds body.open.
+   Raise the entire card above the envelope.
+   ========================================= */
 
-body.open .envelope .letter,
-body.is-open .envelope .letter,
-.envelope-button.open .letter,
-.envelope-button.is-open .letter,
-.envelope-button[aria-expanded="true"] .letter {
-  z-index: 20;
-  transform: translateY(-245px);
+body.open .envelope .letter {
+  z-index: 10;
+  transform: translateY(-340px);
   box-shadow: 0 18px 38px #8f52752b;
 }
 
-/* Hide the pocket and flap while the letter is raised,
-   so they cannot cover any text. */
+/* Open the flap and move the front pocket out
+   of the way so no part of the paper is covered. */
 
-body.open .envelope-pocket,
-body.is-open .envelope-pocket,
-.envelope-button.open .envelope-pocket,
-.envelope-button.is-open .envelope-pocket,
-.envelope-button[aria-expanded="true"] .envelope-pocket {
-  opacity: 0;
-}
-
-body.open .envelope-flap,
-body.is-open .envelope-flap,
-.envelope-button.open .envelope-flap,
-.envelope-button.is-open .envelope-flap,
-.envelope-button[aria-expanded="true"] .envelope-flap {
+body.open .envelope-flap {
   transform: rotateX(180deg);
   opacity: 0;
 }
 
-body.open .wax-seal,
-body.is-open .wax-seal,
-.envelope-button.open .wax-seal,
-.envelope-button.is-open .wax-seal,
-.envelope-button[aria-expanded="true"] .wax-seal {
+body.open .envelope-pocket {
   opacity: 0;
+  transition: opacity 250ms ease;
 }
 
-/* Hint */
+body.open .wax-seal {
+  opacity: 0;
+}
 
 .tap-hint {
   position: relative;
@@ -384,10 +361,8 @@ body.is-open .wax-seal,
   transition: opacity 300ms ease;
 }
 
-body.open .tap-hint,
-body.is-open .tap-hint,
-.envelope-button[aria-expanded="true"] ~ .tap-hint {
-  opacity: 0.6;
+body.open .tap-hint {
+  opacity: 0.7;
 }
 
 /* Sparkles */
@@ -417,14 +392,14 @@ body.is-open .tap-hint,
   font-size: 16px;
 }
 
-/* ==========================================
-   MESSAGE BELOW THE ENVELOPE
-   ========================================== */
+/* =========================================
+   AFTER NOTE
+   ========================================= */
 
 .after-note {
   position: relative;
   z-index: 1;
-  margin: 14px auto 0;
+  margin: 16px auto 0;
   text-align: center;
 }
 
@@ -488,14 +463,13 @@ footer small {
 
 /* Floating hearts */
 
-.floating-heart,
 .heart {
   position: fixed;
-  z-index: 50;
+  z-index: 100;
   bottom: -30px;
   color: var(--pink);
   pointer-events: none;
-  animation: float-heart 4s ease-in forwards;
+  animation: float-heart var(--duration, 4s) ease-in forwards;
 }
 
 @keyframes float-heart {
@@ -514,9 +488,9 @@ footer small {
   }
 }
 
-/* ==========================================
-   RESPONSIVE
-   ========================================== */
+/* =========================================
+   MOBILE
+   ========================================= */
 
 @media (max-width: 600px) {
   .page {
@@ -541,16 +515,15 @@ footer small {
   }
 
   .envelope-button {
-    height: 470px;
+    height: 425px;
   }
 
   .envelope {
-    top: 220px;
+    top: 165px;
     height: 225px;
   }
 
   .envelope .letter {
-    top: -213px;
     left: 3%;
     width: 94%;
   }
@@ -561,7 +534,7 @@ footer small {
 
   .letter-content {
     font-size: 12px;
-    line-height: 1.7;
+    line-height: 1.65;
   }
 
   .letter-content .greeting {
@@ -572,12 +545,8 @@ footer small {
     height: 135px;
   }
 
-  body.open .envelope .letter,
-  body.is-open .envelope .letter,
-  .envelope-button.open .letter,
-  .envelope-button.is-open .letter,
-  .envelope-button[aria-expanded="true"] .letter {
-    transform: translateY(-235px);
+  body.open .envelope .letter {
+    transform: translateY(-325px);
   }
 
   .sparkle-one {
