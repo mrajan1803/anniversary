@@ -1,12 +1,11 @@
 
-/* =========================================
-   FOR ASMITA, WITH LOVE — COMPLETE CSS
-   The entire letter slides out of the envelope.
-   ========================================= */
+/* ==========================================
+   FOR ASMITA, WITH LOVE
+   Complete stylesheet
+   ========================================== */
 
 :root {
   --pink-bg: #fff0f6;
-  --pink-light: #fff8fb;
   --pink: #df6c9c;
   --purple: #a36cba;
   --purple-dark: #8754a7;
@@ -66,7 +65,7 @@ button {
 #heart-layer {
   position: fixed;
   inset: 0;
-  z-index: 20;
+  z-index: 50;
   overflow: hidden;
   pointer-events: none;
 }
@@ -76,7 +75,7 @@ button {
   z-index: 1;
   width: 100%;
   min-height: 100vh;
-  padding: 28px 20px 24px;
+  padding: 28px 20px 30px;
   text-align: center;
 }
 
@@ -129,7 +128,9 @@ h1 em {
   line-height: 1.7;
 }
 
-/* Envelope area */
+/* ==========================================
+   LETTER AND ENVELOPE
+   ========================================== */
 
 .letter-scene {
   position: relative;
@@ -140,11 +141,16 @@ h1 em {
   overflow: visible;
 }
 
+/*
+  Reserve enough space for the paper to rise.
+  The envelope stays near the bottom of this area.
+*/
+
 .envelope-button {
   position: relative;
   display: block;
   width: 100%;
-  height: 430px;
+  height: 490px;
   margin: 0;
   padding: 0;
   border: 0;
@@ -158,13 +164,12 @@ h1 em {
 
 .envelope-button:focus-visible {
   outline: 2px solid var(--purple);
-  outline-offset: 6px;
-  border-radius: 10px;
+  outline-offset: 5px;
 }
 
 .envelope {
   position: absolute;
-  top: 172px;
+  top: 225px;
   left: 0;
   width: 100%;
   height: 255px;
@@ -174,16 +179,17 @@ h1 em {
   box-shadow: 0 18px 42px #85519b2b;
 }
 
-/* The paper starts partly inside the envelope. */
+/* The entire letter is one paper card. */
 
-.letter {
+.envelope .letter {
   position: absolute;
-  top: -172px;
+  top: -218px;
   left: 5%;
-  z-index: 2;
+  z-index: 10;
   width: 90%;
   height: auto;
   max-height: none;
+  margin: 0;
   padding: 0;
   border-radius: 9px;
   overflow: visible;
@@ -192,14 +198,15 @@ h1 em {
   transform: translateY(0);
   transform-origin: center bottom;
   transition:
-    transform 900ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    transform 850ms cubic-bezier(0.2, 0.75, 0.25, 1),
     box-shadow 700ms ease;
   will-change: transform;
 }
 
 .paper {
+  position: relative;
   width: 100%;
-  padding: 17px 23px 15px;
+  padding: 18px 23px 16px;
   border-radius: 9px;
   background: var(--paper);
   text-align: left;
@@ -209,7 +216,7 @@ h1 em {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
   color: #b47b9e;
   font-size: 9px;
   font-weight: 700;
@@ -225,15 +232,16 @@ h1 em {
   color: #65465f;
   font-family: "Playfair Display", Georgia, serif;
   font-size: 12px;
-  line-height: 1.65;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
 }
 
 .letter-content p {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
 }
 
 .letter-content .greeting {
-  margin-bottom: 9px;
+  margin-bottom: 12px;
   color: var(--purple);
   font-size: 17px;
   font-style: italic;
@@ -241,14 +249,14 @@ h1 em {
 }
 
 .letter-content .signoff {
-  margin-top: 15px;
-  margin-bottom: 3px;
+  margin-top: 17px;
+  margin-bottom: 4px;
 }
 
 .letter-content .signature {
   margin-bottom: 5px;
   color: var(--purple);
-  font-size: 19px;
+  font-size: 20px;
   font-style: italic;
   font-weight: 600;
 }
@@ -269,32 +277,36 @@ h1 em {
   text-align: center;
 }
 
-/* Envelope layers */
+/* Envelope base */
 
 .envelope-back {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 2;
   border-radius: 11px;
   background: linear-gradient(145deg, #b58acb, #9561b1);
   pointer-events: none;
 }
 
+/* Front pocket covers the lower paper when closed. */
+
 .envelope-pocket {
   position: absolute;
   inset: 0;
-  z-index: 4;
+  z-index: 12;
   border-radius: 0 0 11px 11px;
   background: #a274bd;
   clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
   pointer-events: none;
 }
 
+/* Top flap */
+
 .envelope-flap {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 14;
   width: 100%;
   height: 155px;
   border-radius: 10px 10px 0 0;
@@ -311,28 +323,38 @@ h1 em {
   position: absolute;
   top: 58%;
   left: 50%;
-  z-index: 6;
-  color: #df6c9c;
+  z-index: 15;
+  color: var(--pink);
   font-size: 24px;
   transform: translate(-50%, -50%);
   transition: opacity 300ms ease;
   pointer-events: none;
 }
 
-/* =========================================
-   OPEN STATE
-   Supports the body.open class used by JS
-   and the button's aria-expanded attribute.
-   ========================================= */
+/* ==========================================
+   OPEN LETTER
+   The paper rises above the complete envelope.
+   ========================================== */
 
-body.open .letter,
-body.is-open .letter,
+body.open .envelope .letter,
+body.is-open .envelope .letter,
 .envelope-button.open .letter,
 .envelope-button.is-open .letter,
 .envelope-button[aria-expanded="true"] .letter {
-  z-index: 10;
-  transform: translateY(-195px);
-  box-shadow: 0 15px 38px #8f52752b;
+  z-index: 20;
+  transform: translateY(-245px);
+  box-shadow: 0 18px 38px #8f52752b;
+}
+
+/* Hide the pocket and flap while the letter is raised,
+   so they cannot cover any text. */
+
+body.open .envelope-pocket,
+body.is-open .envelope-pocket,
+.envelope-button.open .envelope-pocket,
+.envelope-button.is-open .envelope-pocket,
+.envelope-button[aria-expanded="true"] .envelope-pocket {
+  opacity: 0;
 }
 
 body.open .envelope-flap,
@@ -341,7 +363,7 @@ body.is-open .envelope-flap,
 .envelope-button.is-open .envelope-flap,
 .envelope-button[aria-expanded="true"] .envelope-flap {
   transform: rotateX(180deg);
-  opacity: 0.35;
+  opacity: 0;
 }
 
 body.open .wax-seal,
@@ -352,8 +374,7 @@ body.is-open .wax-seal,
   opacity: 0;
 }
 
-/* The letter is above the envelope when opened.
-   The full letter remains visible, including its signature. */
+/* Hint */
 
 .tap-hint {
   position: relative;
@@ -369,7 +390,7 @@ body.is-open .tap-hint,
   opacity: 0.6;
 }
 
-/* Decorative sparkles */
+/* Sparkles */
 
 .sparkle {
   position: absolute;
@@ -396,12 +417,14 @@ body.is-open .tap-hint,
   font-size: 16px;
 }
 
-/* Note beneath the envelope */
+/* ==========================================
+   MESSAGE BELOW THE ENVELOPE
+   ========================================== */
 
 .after-note {
   position: relative;
   z-index: 1;
-  margin: 16px auto 0;
+  margin: 14px auto 0;
   text-align: center;
 }
 
@@ -463,14 +486,14 @@ footer small {
   font-size: 10px;
 }
 
-/* Floating hearts created by JavaScript */
+/* Floating hearts */
 
 .floating-heart,
 .heart {
   position: fixed;
-  z-index: 30;
+  z-index: 50;
   bottom: -30px;
-  color: #e16b9c;
+  color: var(--pink);
   pointer-events: none;
   animation: float-heart 4s ease-in forwards;
 }
@@ -491,7 +514,9 @@ footer small {
   }
 }
 
-/* Mobile layout */
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
 
 @media (max-width: 600px) {
   .page {
@@ -516,16 +541,16 @@ footer small {
   }
 
   .envelope-button {
-    height: 410px;
+    height: 470px;
   }
 
   .envelope {
-    top: 165px;
+    top: 220px;
     height: 225px;
   }
 
-  .letter {
-    top: -165px;
+  .envelope .letter {
+    top: -213px;
     left: 3%;
     width: 94%;
   }
@@ -536,7 +561,7 @@ footer small {
 
   .letter-content {
     font-size: 12px;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   .letter-content .greeting {
@@ -547,16 +572,12 @@ footer small {
     height: 135px;
   }
 
-  body.open .letter,
-  body.is-open .letter,
+  body.open .envelope .letter,
+  body.is-open .envelope .letter,
   .envelope-button.open .letter,
   .envelope-button.is-open .letter,
   .envelope-button[aria-expanded="true"] .letter {
-    transform: translateY(-185px);
-  }
-
-  .after-note {
-    margin-top: 14px;
+    transform: translateY(-235px);
   }
 
   .sparkle-one {
@@ -565,6 +586,10 @@ footer small {
 
   .sparkle-two {
     right: -5px;
+  }
+
+  .after-note {
+    margin-top: 14px;
   }
 }
 
