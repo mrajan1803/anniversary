@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffeaf2">
+  <meta name="theme-color" content="#ffedf5">
   <title>For Asmita, With Love ♥</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
@@ -18,12 +18,13 @@
 <body>
   <div class="background-glow glow-one"></div>
   <div class="background-glow glow-two"></div>
-  <div id="heart-layer"></div>
+  <div id="heart-layer" aria-hidden="true"></div>
 
   <main class="page">
-
     <div class="topline">
-      <span>♥</span> A LITTLE SOMETHING FOR YOU <span>♥</span>
+      <span>♥</span>
+      A LITTLE SOMETHING FOR YOU
+      <span>♥</span>
     </div>
 
     <header class="intro">
@@ -35,84 +36,83 @@
       </p>
     </header>
 
-    <section class="letter-scene">
-
-      <span class="sparkle sparkle-one">✦</span>
-      <span class="sparkle sparkle-two">✧</span>
-      <span class="sparkle sparkle-three">✦</span>
+    <section class="letter-experience" id="letter-experience">
+      <div class="decor decor-one">♡</div>
+      <div class="decor decor-two">✦</div>
+      <div class="decor decor-three">♡</div>
 
       <button
-        class="envelope-button"
-        id="envelope-button"
-        aria-label="Open your anniversary letter"
+        class="open-button"
+        id="open-button"
+        type="button"
         aria-expanded="false"
+        aria-controls="love-letter"
       >
-        <div class="envelope">
-
-          <div class="letter" id="letter">
-            <div class="paper">
-
-              <div class="paper-top">
-                A LETTER FOR YOU <span>♥</span>
-              </div>
-
-              <div class="letter-content">
-                <p class="greeting">My dearest Asmita,</p>
-
-                <div id="letter-message">
-                  <p>Happy anniversary, my love. ♥</p>
-
-                  <p>
-                    Sometimes I wonder how I got so lucky to have you
-                    in my life. You make ordinary days feel special,
-                    little moments feel like memories, and the world
-                    feel a little softer just by being in it.
-                  </p>
-
-                  <p>
-                    Thank you for being you — for the smiles, the
-                    conversations, the silly moments, and all the
-                    little things that mean more to me than I can
-                    explain. If I could choose all over again,
-                    I would still find my way to you.
-                  </p>
-
-                  <p>
-                    Here's to us, to everything we've shared, and to
-                    all the beautiful moments still waiting for us.
-                    I hope I never stop finding new reasons to fall
-                    for you.
-                  </p>
-                </div>
-
-                <p class="signoff">Always yours,</p>
-                <p class="signature">Mehul <span>♥</span></p>
-              </div>
-
-              <div class="paper-bottom">YOU + ME, ALWAYS</div>
-            </div>
-          </div>
-
-          <div class="envelope-back"></div>
-          <div class="envelope-pocket"></div>
-          <div class="envelope-flap"></div>
-          <div class="wax-seal">♥</div>
-
-        </div>
+        <span class="mini-envelope" aria-hidden="true">
+          <span class="mini-envelope-flap"></span>
+          <span class="mini-envelope-heart">♥</span>
+        </span>
+        <span class="button-label" id="button-label">Open my letter</span>
+        <span class="button-arrow" aria-hidden="true">↓</span>
       </button>
 
       <p class="tap-hint" id="tap-hint">
-        ↗ Tap the envelope to open your letter
+        A little letter, written just for you
       </p>
+
+      <article class="letter-card" id="love-letter" aria-hidden="true" inert>
+        <div class="letter-paper">
+          <div class="paper-heading">
+            <span>A LETTER FOR YOU</span>
+            <span class="paper-heart">♥</span>
+          </div>
+
+          <div class="paper-rule"></div>
+
+          <div class="letter-content">
+            <p class="greeting">My dearest Asmita,</p>
+
+            <p>Happy anniversary, my love. <span class="inline-heart">♥</span></p>
+
+            <p>
+              Sometimes I wonder how I got so lucky to have you in my
+              life. You make ordinary days feel special, little moments
+              feel like memories, and the world feel a little softer
+              just by being in it.
+            </p>
+
+            <p>
+              Thank you for being you — for the smiles, the conversations,
+              the silly moments, and all the little things that mean more
+              to me than I can explain. If I could choose all over again,
+              I would still find my way to you.
+            </p>
+
+            <p>
+              Here's to us, to everything we've shared, and to all the
+              beautiful moments still waiting for us. I hope I never stop
+              finding new reasons to fall for you.
+            </p>
+
+            <p class="signoff">Always yours,</p>
+            <p class="signature">Mehul <span>♥</span></p>
+          </div>
+
+          <div class="paper-footer">YOU + ME, ALWAYS</div>
+          <div class="paper-decoration decoration-left">♡</div>
+          <div class="paper-decoration decoration-right">✦</div>
+        </div>
+      </article>
     </section>
 
-    <section class="after-note" id="after-note">
+    <section class="after-note">
       <div class="after-heart">♥</div>
       <p>One little reminder, today and every day:</p>
       <h2>You mean the world to me.</h2>
+      <p class="forever-note">And if I had to choose again, I'd choose you.</p>
 
-      <button class="replay-button" id="replay-button">
-        Read it again <span>↻</span>
+      <button class="replay-button" id="replay-button" type="button">
+        Fold it again <span>↻</span>
       </button>
     </section>
 
@@ -120,8 +120,6 @@
       Made with love, just for you <span>♥</span>
       <small>— Mehul</small>
     </footer>
-
   </main>
 </body>
 </html>
-
