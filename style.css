@@ -1,13 +1,7 @@
 
-/* =========================================
-   FOR ASMITA, WITH LOVE
-   Complete envelope and letter animation
-   ========================================= */
-
 :root {
   --pink: #df6c9c;
   --purple: #a36cba;
-  --purple-dark: #8956aa;
   --ink: #492d49;
   --muted: #a17699;
   --paper: #fffdf8;
@@ -28,10 +22,10 @@ body {
   overflow-x: hidden;
   color: var(--ink);
   background:
-    radial-gradient(ellipse at 10% 35%, #fbd8e8 0%, transparent 36%),
-    radial-gradient(ellipse at 90% 75%, #f9ddec 0%, transparent 35%),
-    linear-gradient(135deg, #ffedf5, #fff7fa 55%, #ffe8f2);
-  font-family: "DM Sans", Arial, sans-serif;
+    radial-gradient(ellipse at 8% 35%, #fbd6e8 0%, transparent 38%),
+    radial-gradient(ellipse at 92% 75%, #f7d9ec 0%, transparent 36%),
+    linear-gradient(135deg, #ffedf5, #fff8fb 55%, #ffeaf3);
+  font-family: "DM Sans", sans-serif;
 }
 
 button {
@@ -41,30 +35,30 @@ button {
 .background-glow {
   position: fixed;
   z-index: 0;
-  width: 340px;
-  height: 340px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
-  filter: blur(75px);
-  opacity: 0.24;
+  filter: blur(80px);
+  opacity: 0.2;
   pointer-events: none;
 }
 
 .glow-one {
-  top: 12%;
+  top: 10%;
   left: -180px;
   background: #f29ac4;
 }
 
 .glow-two {
   right: -180px;
-  bottom: 5%;
+  bottom: 0;
   background: #d8a1e8;
 }
 
 #heart-layer {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 20;
   overflow: hidden;
   pointer-events: none;
 }
@@ -74,19 +68,19 @@ button {
   z-index: 1;
   width: 100%;
   min-height: 100vh;
-  padding: 28px 20px 30px;
+  padding: 30px 20px 28px;
   text-align: center;
 }
 
 .topline {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 12px;
   color: #b47b9e;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2.7px;
 }
 
 .topline span {
@@ -94,25 +88,24 @@ button {
 }
 
 .intro {
-  margin: 46px auto 0;
+  margin: 42px auto 0;
 }
 
 .eyebrow {
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   color: #b47b9e;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2.8px;
 }
 
 h1 {
   margin: 0;
-  color: var(--ink);
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(46px, 6vw, 76px);
+  font-size: clamp(44px, 7vw, 76px);
   font-weight: 600;
-  letter-spacing: -2px;
   line-height: 1.2;
+  letter-spacing: -2px;
 }
 
 h1 em {
@@ -121,306 +114,336 @@ h1 em {
 }
 
 .intro-copy {
-  margin: 14px 0 0;
+  margin: 13px 0 0;
   color: var(--muted);
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-/* =========================================
-   ENVELOPE SCENE
-   ========================================= */
+/* LETTER EXPERIENCE */
 
-.letter-scene {
+.letter-experience {
+  position: relative;
+  width: min(100%, 540px);
+  margin: 34px auto 0;
+  padding: 0 0 10px;
+}
+
+.decor {
+  position: absolute;
+  color: #d9a5d0;
+  pointer-events: none;
+}
+
+.decor-one {
+  top: 100px;
+  left: 8px;
+  font-size: 29px;
+  transform: rotate(-15deg);
+}
+
+.decor-two {
+  top: 185px;
+  right: 0;
+  font-size: 25px;
+}
+
+.decor-three {
+  top: 310px;
+  right: 15px;
+  color: #e6a2c7;
+  font-size: 23px;
+}
+
+/* OPEN BUTTON */
+
+.open-button {
   position: relative;
   z-index: 2;
-  width: min(440px, 94vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   margin: 0 auto;
-  padding-top: 0;
-  overflow: visible;
-}
-
-.envelope-button {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 440px;
-  margin: 0;
-  padding: 0;
+  padding: 0 15px;
   border: 0;
   background: transparent;
-  text-align: left;
+  color: var(--purple);
   cursor: pointer;
-  overflow: visible;
   -webkit-tap-highlight-color: transparent;
 }
 
-.envelope-button:focus-visible {
-  outline: 2px solid var(--purple);
-  outline-offset: 5px;
-}
-
-/* The envelope body */
-
-.envelope {
-  position: absolute;
-  top: 170px;
-  left: 0;
-  width: 100%;
-  height: 255px;
-  border-radius: 11px;
-  background: linear-gradient(145deg, #ad80c5, #8956aa);
-  box-shadow: 0 18px 42px #85519b2b;
-  overflow: visible;
-}
-
-/* Paper is inside the envelope when closed */
-
-.envelope .letter {
-  position: absolute;
-  top: 8px;
-  left: 5%;
-  z-index: 2;
-  width: 90%;
-  height: auto;
-  max-height: none;
-  margin: 0;
-  padding: 0;
-  border-radius: 9px;
-  overflow: visible;
-  background: var(--paper);
-  box-shadow: 0 5px 20px #75468f18;
-  transform: translateY(0);
-  transition:
-    transform 950ms cubic-bezier(0.2, 0.75, 0.25, 1),
-    box-shadow 700ms ease;
-  will-change: transform;
-}
-
-.paper {
+.mini-envelope {
   position: relative;
-  width: 100%;
-  padding: 18px 23px 16px;
-  border-radius: 9px;
-  background: var(--paper);
-  text-align: left;
+  display: block;
+  width: 112px;
+  height: 76px;
+  border-radius: 7px;
+  background: linear-gradient(145deg, #b78acb, #9562b0);
+  box-shadow: 0 12px 25px #87549b25;
+  transition:
+    transform 350ms ease,
+    opacity 350ms ease;
 }
 
-.paper-top {
+.mini-envelope::before,
+.mini-envelope::after {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  content: "";
+}
+
+.mini-envelope::before {
+  left: 0;
+  border-right: 56px solid transparent;
+  border-bottom: 43px solid #a679bd;
+}
+
+.mini-envelope::after {
+  right: 0;
+  border-left: 56px solid transparent;
+  border-bottom: 43px solid #b287c8;
+}
+
+.mini-envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 42px solid #d0a8dd;
+  border-right: 56px solid transparent;
+  border-left: 56px solid transparent;
+  transform-origin: top center;
+  transition: transform 450ms ease;
+}
+
+.mini-envelope-heart {
+  position: absolute;
+  z-index: 2;
+  top: 37px;
+  left: 50%;
+  color: #e777a5;
+  font-size: 18px;
+  transform: translateX(-50%);
+}
+
+.button-label {
+  display: inline-block;
+  padding: 12px 23px;
+  border: 1px solid #e5b8d5;
+  border-radius: 30px;
+  background: #fff9fc;
+  color: #9d65ac;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 5px 18px #a66b9810;
+  transition:
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.open-button:hover .button-label {
+  background: #fce7f2;
+  transform: translateY(-2px);
+}
+
+.button-arrow {
+  color: #b47b9e;
+  font-size: 16px;
+  animation: arrow-bob 1.5s ease-in-out infinite;
+}
+
+.tap-hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* THE LETTER
+   It begins fully folded away.
+   Its height expands only after the button is pressed.
+*/
+
+.letter-card {
+  display: grid;
+  grid-template-rows: 0fr;
+  width: min(100%, 460px);
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+  transition:
+    grid-template-rows 850ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 400ms ease,
+    transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    margin 650ms ease;
+}
+
+.letter-paper {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 28px;
+  border: 1px solid #f2e3e9;
+  border-radius: 5px 5px 13px 13px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      #f6eaf0 32px
+    ),
+    var(--paper);
+  box-shadow: 0 20px 55px #87549b1c;
+  text-align: left;
+  transform-origin: top center;
+  transition:
+    padding 700ms ease,
+    box-shadow 500ms ease;
+}
+
+.paper-heading {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  align-items: center;
+  margin-bottom: 15px;
   color: #b47b9e;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 2px;
 }
 
-.paper-top span {
+.paper-heart {
   color: var(--pink);
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.paper-rule {
+  height: 1px;
+  margin-bottom: 20px;
+  background: #edd7e4;
 }
 
 .letter-content {
   color: #65465f;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 12px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.9;
   overflow-wrap: anywhere;
 }
 
 .letter-content p {
-  margin: 0 0 11px;
+  margin: 0 0 16px;
 }
 
 .letter-content .greeting {
-  margin-bottom: 10px;
+  margin-bottom: 18px;
   color: var(--purple);
-  font-size: 17px;
+  font-size: 23px;
   font-style: italic;
   font-weight: 600;
 }
 
+.inline-heart {
+  color: var(--pink);
+}
+
 .letter-content .signoff {
-  margin-top: 15px;
+  margin-top: 25px;
   margin-bottom: 4px;
 }
 
 .letter-content .signature {
-  margin-bottom: 5px;
+  margin-bottom: 16px;
   color: var(--purple);
-  font-size: 19px;
+  font-size: 26px;
   font-style: italic;
   font-weight: 600;
 }
 
 .signature span {
   color: var(--pink);
-  font-size: 14px;
+  font-size: 18px;
 }
 
-.paper-bottom {
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid #f0dce8;
+.paper-footer {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #edd7e4;
   color: #b47b9e;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   text-align: center;
 }
 
-/* Back panel */
-
-.envelope-back {
+.paper-decoration {
   position: absolute;
-  inset: 0;
-  z-index: 3;
-  border-radius: 11px;
-  background: linear-gradient(145deg, #b58acb, #9561b1);
+  color: #e7bad7;
   pointer-events: none;
 }
 
-/* Front pocket covers the paper while closed */
-
-.envelope-pocket {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  border-radius: 0 0 11px 11px;
-  background: #a274bd;
-  clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity 250ms ease,
-    visibility 0s;
-  pointer-events: none;
-}
-
-/* Top triangular flap */
-
-.envelope-flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  width: 100%;
-  height: 155px;
-  border-radius: 10px 10px 0 0;
-  background: #c39ad5;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: top center;
-  transition:
-    transform 650ms ease,
-    opacity 250ms ease,
-    visibility 0s;
-  pointer-events: none;
-}
-
-.wax-seal {
-  position: absolute;
-  top: 58%;
-  left: 50%;
-  z-index: 6;
-  color: var(--pink);
-  font-size: 24px;
-  transform: translate(-50%, -50%);
-  transition: opacity 250ms ease;
-  pointer-events: none;
-}
-
-/* =========================================
-   OPEN STATE
-   The paper rises above the whole envelope.
-   ========================================= */
-
-body.open .envelope .letter {
-  z-index: 10;
-  transform: translateY(-390px);
-  box-shadow: 0 18px 38px #8f52752b;
-}
-
-/* The front pocket fades away so it cannot
-   cover any part of the raised letter. */
-
-body.open .envelope-pocket {
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 250ms ease,
-    visibility 0s 250ms;
-}
-
-body.open .envelope-flap {
-  transform: rotateX(180deg);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    transform 650ms ease,
-    opacity 250ms ease,
-    visibility 0s 250ms;
-}
-
-body.open .wax-seal {
-  opacity: 0;
-}
-
-.tap-hint {
-  position: relative;
-  margin: -2px 0 0;
-  color: #a77a9c;
-  font-size: 12px;
-  transition: opacity 300ms ease;
-}
-
-body.open .tap-hint {
-  opacity: 0.7;
-}
-
-/* Sparkles */
-
-.sparkle {
-  position: absolute;
-  z-index: 1;
-  color: #d6a6d0;
-  font-size: 23px;
-  pointer-events: none;
-}
-
-.sparkle-one {
-  top: 105px;
-  left: -35px;
-}
-
-.sparkle-two {
-  top: 185px;
-  right: -15px;
+.decoration-left {
+  top: 48%;
+  left: 9px;
   font-size: 20px;
 }
 
-.sparkle-three {
-  top: 5px;
-  right: -25px;
-  font-size: 16px;
+.decoration-right {
+  right: 12px;
+  bottom: 70px;
+  font-size: 19px;
 }
 
-/* =========================================
-   AFTER NOTE
-   ========================================= */
+/* OPEN STATE */
+
+.letter-experience.is-open .letter-card {
+  grid-template-rows: 1fr;
+  margin-top: 25px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.letter-experience.is-open .letter-paper {
+  padding: 25px 28px 23px;
+  box-shadow: 0 25px 65px #87549b25;
+}
+
+.letter-experience.is-open .mini-envelope {
+  transform: translateY(-4px) scale(0.88);
+  opacity: 0.8;
+}
+
+.letter-experience.is-open .mini-envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.letter-experience.is-open .button-arrow {
+  display: none;
+}
+
+.letter-experience.is-open .button-label {
+  background: #fce7f2;
+}
+
+.letter-experience.is-open .tap-hint {
+  display: none;
+}
+
+/* AFTER NOTE */
 
 .after-note {
-  position: relative;
-  z-index: 1;
-  margin: 16px auto 0;
-  text-align: center;
+  margin: 28px auto 0;
 }
 
 .after-heart {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--pink);
-  font-size: 29px;
+  font-size: 28px;
 }
 
 .after-note > p {
@@ -430,7 +453,7 @@ body.open .tap-hint {
 }
 
 .after-note h2 {
-  margin: 10px 0 19px;
+  margin: 10px 0;
   color: #9d65ac;
   font-family: "Playfair Display", Georgia, serif;
   font-size: clamp(27px, 4vw, 36px);
@@ -438,18 +461,26 @@ body.open .tap-hint {
   font-weight: 500;
 }
 
+.after-note .forever-note {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
 .replay-button {
-  padding: 12px 18px;
-  color: #9d65ac;
+  margin-top: 18px;
+  padding: 11px 19px;
   border: 1px solid #e5b8d5;
   border-radius: 30px;
   background: #fff9fc;
+  color: #9d65ac;
   cursor: pointer;
-  transition: background 200ms ease, transform 200ms ease;
+  transition:
+    background 200ms ease,
+    transform 200ms ease;
 }
 
 .replay-button:hover {
-  background: #fce8f2;
+  background: #fce7f2;
   transform: translateY(-2px);
 }
 
@@ -457,7 +488,7 @@ body.open .tap-hint {
   margin-left: 7px;
 }
 
-/* Footer */
+/* FOOTER */
 
 footer {
   margin-top: 28px;
@@ -475,11 +506,11 @@ footer small {
   font-size: 10px;
 }
 
-/* Floating hearts */
+/* FLOATING HEARTS */
 
 .heart {
   position: fixed;
-  z-index: 100;
+  z-index: 30;
   bottom: -30px;
   color: var(--pink);
   pointer-events: none;
@@ -498,21 +529,29 @@ footer small {
 
   100% {
     opacity: 0;
-    transform: translateY(-85vh) scale(1.25) rotate(25deg);
+    transform: translateY(-85vh) scale(1.2) rotate(25deg);
   }
 }
 
-/* =========================================
-   RESPONSIVE
-   ========================================= */
+@keyframes arrow-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* MOBILE */
 
 @media (max-width: 600px) {
   .page {
-    padding: 24px 15px 22px;
+    padding: 24px 16px;
   }
 
   .intro {
-    margin-top: 38px;
+    margin-top: 35px;
   }
 
   h1 {
@@ -524,55 +563,31 @@ footer small {
     font-size: 14px;
   }
 
-  .letter-scene {
-    width: min(440px, 94vw);
+  .letter-experience {
+    margin-top: 30px;
   }
 
-  .envelope-button {
-    height: 425px;
-  }
-
-  .envelope {
-    top: 165px;
-    height: 225px;
-  }
-
-  .envelope .letter {
-    left: 3%;
-    width: 94%;
-  }
-
-  .paper {
-    padding: 15px 17px 13px;
+  .letter-paper,
+  .letter-experience.is-open .letter-paper {
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   .letter-content {
-    font-size: 12px;
-    line-height: 1.65;
+    font-size: 13px;
+    line-height: 1.85;
   }
 
   .letter-content .greeting {
-    font-size: 16px;
+    font-size: 21px;
   }
 
-  .envelope-flap {
-    height: 135px;
+  .decor-one {
+    left: 0;
   }
 
-  body.open .envelope .letter {
-    transform: translateY(-390px);
-  }
-
-  .sparkle-one {
-    left: -8px;
-  }
-
-  .sparkle-two {
-    right: -5px;
-  }
-
-  .after-note {
-    margin-top: 14px;
+  .decor-two {
+    right: 0;
   }
 }
 
