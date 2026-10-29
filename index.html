@@ -4,39 +4,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fff0f4">
-  <title>For My BBG 🤍</title>
+  <meta name="theme-color" content="#ffedf5">
+  <title>For Asmita, With Love ♥</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-  <div class="floating-hearts" aria-hidden="true"></div>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+  <div id="heart-layer" aria-hidden="true"></div>
 
   <main class="page">
-    <header class="hero">
-      <p class="eyebrow">FIVE YEARS OF US</p>
-      <h1>Hey, Asmita. <span>♥</span></h1>
-      <p class="subtitle">
-        Five years, a million memories, and still my favourite person.
+    <div class="topline">
+      <span>♥</span>
+      A LITTLE SOMETHING FOR YOU
+      <span>♥</span>
+    </div>
+
+    <header class="intro">
+      <p class="eyebrow">TO MY FAVOURITE PERSON</p>
+      <h1>Hey, <em>Asmita.</em></h1>
+      <p class="intro-copy">
+        I made you a tiny corner of the internet.<br>
+        It has one very important thing inside.
       </p>
     </header>
 
     <section class="letter-experience" id="letter-experience">
+      <div class="decor decor-one">♡</div>
+      <div class="decor decor-two">✦</div>
+      <div class="decor decor-three">♡</div>
+
       <button
-        class="letter-trigger"
-        id="letter-trigger"
+        class="open-button"
+        id="open-button"
         type="button"
         aria-expanded="false"
         aria-controls="love-letter"
       >
-        <span class="envelope-icon" aria-hidden="true">💌</span>
-        <span class="trigger-text">Open your letter, BBG</span>
-        <span class="trigger-arrow" aria-hidden="true">↓</span>
+        <span class="mini-envelope" aria-hidden="true">
+          <span class="mini-envelope-flap"></span>
+          <span class="mini-envelope-heart">♥</span>
+        </span>
+        <span class="button-label" id="button-label">Open my letter</span>
+        <span class="button-arrow" aria-hidden="true">↓</span>
       </button>
 
-      <article class="love-letter" id="love-letter" aria-hidden="true">
+      <p class="tap-hint" id="tap-hint">
+        A little letter, written just for you
+      </p>
+
+      <article class="letter-card" id="love-letter" aria-hidden="true" inert>
         <div class="letter-paper">
-          <div class="letter-decoration" aria-hidden="true">♡</div>
+          <div class="paper-heading">
+            <span>A LETTER FOR YOU</span>
+            <span class="paper-heart">♥</span>
+          </div>
+
+          <div class="paper-rule"></div>
 
           <div class="letter-content">
             <p class="greeting">My dearesr BBG,</p>
@@ -78,26 +109,37 @@
               be always available whenever you need me my love.
             </p>
 
-            <p class="signoff">I LOVE YOU SO MUCHHHHH</p>
+            <p class="signoff">
+              I LOVE YOU SO MUCHHHHH
+            </p>
+
             <p class="signature">
               MY LOVELY GIRLIE BBG <span>🤍</span>
             </p>
           </div>
 
-          <div class="letter-footer" aria-hidden="true">
-            <span>Five years down</span>
-            <span>Forever to go ♡</span>
-          </div>
+          <div class="paper-footer">YOU + ME, ALWAYS</div>
+          <div class="paper-decoration decoration-left">♡</div>
+          <div class="paper-decoration decoration-right">✦</div>
         </div>
       </article>
     </section>
 
-    <footer class="page-footer">
-      <p>Made with all my love, just for you.</p>
-      <span aria-hidden="true">♡</span>
+    <section class="after-note">
+      <div class="after-heart">♥</div>
+      <p>One little reminder, today and every day:</p>
+      <h2>You mean the world to me.</h2>
+      <p class="forever-note">And if I had to choose again, I'd choose you.</p>
+
+      <button class="replay-button" id="replay-button" type="button">
+        Fold it again <span>↻</span>
+      </button>
+    </section>
+
+    <footer>
+      Made with love, just for you <span>♥</span>
+      <small>— Mehul</small>
     </footer>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
